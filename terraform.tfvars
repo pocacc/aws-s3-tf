@@ -1,1 +1,1 @@
-bucket = "jlksjfslkjfdlkasjdflkasjf"
+bucket = "mybucket"
