@@ -1,1 +1,1 @@
-bucket = $BUCKET
+bucket = "ajlsdfkjaslkdfgjsalkdjfalkdsjfl"
