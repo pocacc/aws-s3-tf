@@ -1,1 +1,1 @@
-bucket = "mybucket"
+bucket = "mybucketnew"
