@@ -1,8 +1,8 @@
-name: "prod_deploy"
+name: "backstage_deploy"
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
 permissions:
       id-token: write # This is required for aws oidc connection
@@ -12,7 +12,7 @@ env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
 jobs:
-  prod_deploy:
+  backstage_deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -98,5 +98,5 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=true
