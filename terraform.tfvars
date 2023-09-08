@@ -1,2 +1,4 @@
-bucket = "poc-idp-s3-test"
-
+bucket=${{ values.bucket }}
+forcedestroy=${{ values.force_destroy }}
+acl=${{ values.acl }}
+email=${{ values.email }}
