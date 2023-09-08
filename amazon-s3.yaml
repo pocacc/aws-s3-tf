@@ -119,13 +119,26 @@ spec:
           - "privado"
           - "público"
   steps:
+    - id: step2
+      name: Log message
+      action: debug:log
+    - id: fetch
+      name: Template S3 Terraform
+      action: fetch:template
+      input:
+        url: .
+        values:
+          email: "\"${{ parameters.email }}\""
+          bucket: "\"${{  parameters.bucket }}\""
+          force_destroy: "\"${{  parameters.forcedestroy }}\""
+          acl: "\"${{  parameters.acl}}\""
     - id: fetchRepository
       name: Fetch repository
       action: fetch:template
       input:
         url: https://github.com/pocacc/aws-s3-tf
     - id: catalogTemplate
-      name: Create TFVARS
+      name: Create catalog-info.yaml file
       action: fetch:template
       input:
         url: ./terraform.tfvars
@@ -152,7 +165,7 @@ spec:
           - github.com
         description: This is ${{ parameters.bucket }}
         repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
-        repoVisibility: public
+        RepoVisibility: private
         branchName: main
 
   output:
