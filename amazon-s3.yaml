@@ -152,6 +152,7 @@ spec:
         repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
         repoVisibility: public
         branchName: main
+
   output:
     links:
       - title: Repository
