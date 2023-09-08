@@ -9,5 +9,6 @@ module "aws_s3" {
     Name        = var.bucket
     Project     = var.project
     Environment = var.environment
+    E-mail      = var.email
   }
 }
