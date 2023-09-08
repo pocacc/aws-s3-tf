@@ -139,8 +139,10 @@ spec:
       name: Insert Variables GitHub Action
       action: fetch:template
       input:
-        url: ./.github/workflows/backstage_deploy.yml
+        url: .github/workflows/backstage_deploy.yml
         values:
+          email: ${{ parameters.email }}
+          bucket: ${{ parameters.bucket }}
           region: ${{ parameters.region }}
     - id: publish
       name: Publish
