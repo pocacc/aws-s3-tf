@@ -119,6 +119,11 @@ spec:
           - "privado"
           - "público"
   steps:
+    - id: fetchRepository
+      name: Fetch repository
+      action: fetch:template
+      input:
+        url: https://github.com/pocacc/aws-s3-tf
     - id: catalogTemplate
       name: Create TFVARS
       action: fetch:template
@@ -147,7 +152,6 @@ spec:
         repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
         repoVisibility: public
         branchName: main
-
   output:
     links:
       - title: Repository
