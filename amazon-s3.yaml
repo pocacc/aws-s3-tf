@@ -143,11 +143,11 @@ spec:
       input:
         url: ./terraform.tfvars
         values:
-          email: "\"${{ parameters.email }}\""
           bucket: "\"${{  parameters.bucket }}\""
           force_destroy: "\"${{  parameters.forcedestroy }}\""
           acl: "\"${{  parameters.acl}}\""
           region: "\"${{  parameters.region}}\""
+          email: "\"${{ parameters.email }}\""
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
