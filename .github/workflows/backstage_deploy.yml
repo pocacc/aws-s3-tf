@@ -11,6 +11,8 @@ permissions:
 env:
   TF_LOG: INFO
   TF_INPUT: false
+  email: ${{ values.email }}
+  region: ${{ values.region }}
   aws-region: ${{ values.region }}
 jobs:
   backstage_deploy:
