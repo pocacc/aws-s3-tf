@@ -11,7 +11,7 @@ permissions:
 env:
   TF_LOG: INFO
   TF_INPUT: false
-  TF_VAR_region: ${{ values.region }}
+  aws-region: ${{ value.region }}
 jobs:
   backstage_deploy:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
-          aws-region: ${{ values.AWS_REGION }}
+          aws-region: ${{ value.AWS_REGION }}
           role-session-name: ic-telefonica-openid-role
 
       - name: Setup Terraform
@@ -44,7 +44,7 @@ jobs:
         id: init
         env:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-          AWS_BUCKET_KEY_NAME: ${{ values.bucket }}
+          AWS_BUCKET_KEY_NAME: ${{ value.bucket }}
         run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
 
       - name: Terraform Validate
