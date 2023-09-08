@@ -10,7 +10,7 @@ permissions:
       pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
-  aws-region: ${{ secrets.AWS_REGION }}
+  TF_INPUT: false
 jobs:
   prod_deploy:
     runs-on: ubuntu-latest
@@ -97,5 +97,5 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=true
