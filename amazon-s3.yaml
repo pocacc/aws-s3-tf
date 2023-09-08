@@ -119,25 +119,6 @@ spec:
           - "privado"
           - "público"
   steps:
-    - id: step2
-      name: Log message
-      action: debug:log
-    - id: fetch
-      name: Template S3 Terraform
-      action: fetch:template
-      input:
-        url: .
-        values:
-          email: "\"${{ parameters.email }}\""
-          bucket: "\"${{  parameters.bucket }}\""
-          force_destroy: "\"${{  parameters.forcedestroy }}\""
-          acl: "\"${{  parameters.acl}}\""
-          region: "\"${{  parameters.region}}\""
-    - id: fetchRepository
-      name: Fetch repository
-      action: fetch:template
-      input:
-        url: https://github.com/pocacc/aws-s3-tf
     - id: catalogTemplate
       name: Create catalog-info.yaml file
       action: fetch:template
