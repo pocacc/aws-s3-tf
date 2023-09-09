@@ -25,7 +25,7 @@ jobs:
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-to-assume: arn:aws:iam::945314604561:role/ic-telefonica-openid-role
           aws-region: us-east-1
           role-session-name: ic-telefonica-openid-role
 
@@ -42,9 +42,9 @@ jobs:
       - name: Terraform Init
         id: init
         env:
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-          AWS_BUCKET_KEY_NAME: ${{ values.bucket }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${{ values.resource }}" -backend-config="region=us-east-1"
+          AWS_BUCKET_NAME: ic-telefonica-tf-states
+          AWS_BUCKET_KEY_NAME: dev/s3.state
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ values.resource }}" -backend-config="region=us-east-1"
 
       - name: Terraform Validate
         id: validate
