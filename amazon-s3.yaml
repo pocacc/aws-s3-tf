@@ -122,6 +122,11 @@ spec:
     - id: step2
       name: Log message
       action: debug:log
+    - id: fetchRepository
+      name: Fetch repository
+      action: fetch:template
+      input:
+        url: https://github.com/pocacc/aws-s3-tf
     - id: fetch
       name: Template S3 Terraform
       action: fetch:template
@@ -148,11 +153,16 @@ spec:
           acl: "\"${{  parameters.acl}}\""
           region: "\"${{  parameters.region}}\""
           email: "\"${{ parameters.email }}\""
+    - id: fetchRepository
+      name: Fetch repository
+      action: fetch:template
+      input:
+        url: https://github.com/pocacc/aws-s3-tf
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
       input:
-        url: .github/workflows/backstage_deploy.yml
+        url: ./.github/workflows/backstage_deploy.yml
         values:
           email: ${{ parameters.email }}
           bucket: ${{ parameters.bucket }}
@@ -165,7 +175,7 @@ spec:
           - github.com
         description: This is ${{ parameters.bucket }}
         repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
-        RepoVisibility: private
+        RepoVisibility: internal
         branchName: main
 
   output:
