@@ -10,7 +10,6 @@ permissions:
       pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
-  TF_INPUT: false
   aws-region: us-east-1
 jobs:
   backstage_deploy:
