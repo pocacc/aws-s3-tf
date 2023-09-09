@@ -44,7 +44,7 @@ jobs:
         env:
           AWS_BUCKET_NAME: ic-telefonica-tf-states
           AWS_BUCKET_KEY_NAME: dev/s3.state
-        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ values.resource }}" -backend-config="region=us-east-1"
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=dev/s3.state" -backend-config="region=us-east-1"
 
       - name: Terraform Validate
         id: validate
