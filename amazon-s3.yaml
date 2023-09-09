@@ -122,11 +122,6 @@ spec:
     - id: step2
       name: Log message
       action: debug:log
-    - id: fetchRepository
-      name: Fetch repository
-      action: fetch:template
-      input:
-        url: https://github.com/pocacc/aws-s3-tf
     - id: fetch
       name: Template S3 Terraform
       action: fetch:template
@@ -137,11 +132,6 @@ spec:
           bucket: "\"${{  parameters.bucket }}\""
           force_destroy: "\"${{  parameters.forcedestroy }}\""
           acl: "\"${{  parameters.acl}}\""
-    - id: fetchRepository2
-      name: Fetch repository
-      action: fetch:template
-      input:
-        url: https://github.com/pocacc/aws-s3-tf
     - id: catalogTemplate
       name: Create catalog-info.yaml file
       action: fetch:template
@@ -153,11 +143,6 @@ spec:
           acl: "\"${{  parameters.acl}}\""
           region: "\"${{  parameters.region}}\""
           email: "\"${{ parameters.email }}\""
-    - id: fetchRepository3
-      name: Fetch repository
-      action: fetch:template
-      input:
-        url: https://github.com/pocacc/aws-s3-tf
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
