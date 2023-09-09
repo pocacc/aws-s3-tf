@@ -11,7 +11,7 @@ permissions:
 env:
   TF_LOG: INFO
   TF_INPUT: false
-  aws-region: ${{ values.aws-region }}
+  aws-region: us-east-1
   email: ${{ values.email }}
   resource: ${{ values.resource }}
 jobs:
@@ -29,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
-          aws-region: ${{ values.aws-region }}
+          aws-region: us-east-1
           role-session-name: ic-telefonica-openid-role
 
       - name: Setup Terraform
@@ -47,7 +47,7 @@ jobs:
         env:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
           AWS_BUCKET_KEY_NAME: ${{ values.bucket }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${{ values.resource }}" -backend-config="region=${AWS_REGION}"
+        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${{ values.resource }}" -backend-config="region=us-east-1"
 
       - name: Terraform Validate
         id: validate
