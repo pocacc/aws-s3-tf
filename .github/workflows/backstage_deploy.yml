@@ -12,8 +12,6 @@ env:
   TF_LOG: INFO
   TF_INPUT: false
   aws-region: us-east-1
-  email: ${{ values.email }}
-  resource: ${{ values.resource }}
 jobs:
   backstage_deploy:
     runs-on: ubuntu-latest
@@ -26,7 +24,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
           aws-region: us-east-1
