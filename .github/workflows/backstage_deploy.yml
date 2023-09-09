@@ -13,7 +13,7 @@ env:
   TF_INPUT: false
   aws-region: ${{ values.aws-region }}
   email: ${{ values.email }}
-  region: ${{ values.aws-region }}
+  resource: ${{ values.resource }}
 jobs:
   backstage_deploy:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
         env:
           AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
           AWS_BUCKET_KEY_NAME: ${{ values.bucket }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${{ github.repository }}" -backend-config="region=${AWS_REGION}"
+        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${{ values.resource }}" -backend-config="region=${AWS_REGION}"
 
       - name: Terraform Validate
         id: validate

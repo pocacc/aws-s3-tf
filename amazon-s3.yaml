@@ -149,7 +149,7 @@ spec:
       input:
         url: ./.github/workflows/backstage_deploy.yml
         values:
-          email: ${{ parameters.email }}
+          resource: ${{ parameters.bucket }}
           bucket: ${{ parameters.bucket }}
           aws-region: ${{ parameters.region }}
     - id: publish
