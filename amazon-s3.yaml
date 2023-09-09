@@ -137,7 +137,7 @@ spec:
           bucket: "\"${{  parameters.bucket }}\""
           force_destroy: "\"${{  parameters.forcedestroy }}\""
           acl: "\"${{  parameters.acl}}\""
-    - id: fetchRepository
+    - id: fetchRepository2
       name: Fetch repository
       action: fetch:template
       input:
@@ -153,7 +153,7 @@ spec:
           acl: "\"${{  parameters.acl}}\""
           region: "\"${{  parameters.region}}\""
           email: "\"${{ parameters.email }}\""
-    - id: fetchRepository
+    - id: fetchRepository3
       name: Fetch repository
       action: fetch:template
       input:
