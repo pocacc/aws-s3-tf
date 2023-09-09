@@ -40,7 +40,7 @@ spec:
             - development
         uniqueItems: true
         ui:widget: checkboxes
-      regiao:
+      region:
         title: Escolha a região
         type: string
         description: Região na AWS a qual o ambiente será configurado
@@ -141,7 +141,7 @@ spec:
           bucket: "\"${{  parameters.bucket }}\""
           force_destroy: "\"${{  parameters.forcedestroy }}\""
           acl: "\"${{  parameters.acl}}\""
-          region: "\"${{  parameters.regiao}}\""
+          region: "\"${{  parameters.region}}\""
           email: "\"${{ parameters.email }}\""
     - id: GitHubAction
       name: Insert Variables GitHub Action
@@ -151,7 +151,7 @@ spec:
         values:
           email: ${{ parameters.email }}
           bucket: ${{ parameters.bucket }}
-          aws-region: ${{ parameters.regiao }}
+          aws-region: ${{ parameters.region }}
     - id: publish
       name: Publish
       action: publish:github
