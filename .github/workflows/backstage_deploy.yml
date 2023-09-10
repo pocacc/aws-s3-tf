@@ -10,7 +10,7 @@ permissions:
       pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
-  aws-region: ${{ values.region }}
+  aws-region: ${{ values.aws_region }}
   role_to_assume: ${{ values.role_to_assume }}
   role_session_name: ${{ values.role_session_name }}
 
