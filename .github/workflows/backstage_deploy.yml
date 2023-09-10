@@ -14,7 +14,7 @@ env:
 
 jobs:
   backstage_deploy:
-    name: 'Terraform Deploy S3 - Backstage'
+    name: 'TF S3 - Backstage'
     runs-on: ubuntu-latest
     defaults:
       run:
