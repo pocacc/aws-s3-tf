@@ -11,8 +11,9 @@ permissions:
 env:
   TF_LOG: INFO
   aws-region: us-east-1
-  role-to-assume: ${{ values.role-to-assume }}
-  role-session-name: ${{ values-session-name }}
+  role-to-assume: ${{values.role-to-assume}}
+  role-session-name: ${{values-session-name}}
+
 
 jobs:
   backstage_deploy:
