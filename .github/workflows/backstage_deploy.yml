@@ -30,9 +30,9 @@ jobs:
           role_session_name: ${{ values.role_session_name }}
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: env.role_to_assume
-          aws-region: env.aws_region
-          role-session-name: env.role_session_name
+          role-to-assume: ${{ values.role_to_assume }}
+          aws-region: ${{ values.region }}
+          role-session-name: ${{ values.role_session_name }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
