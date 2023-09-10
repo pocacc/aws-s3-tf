@@ -11,8 +11,8 @@ permissions:
 env:
   TF_LOG: INFO
   aws-region: us-east-1
-  role_to_assume: ${{values.role_to_assume}}
-  role_session_name: ${{values_session_name}}
+  role_to_assume: ${{ values.role_to_assume }}
+  role_session_name: ${{ values.role_session_name }}
 
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
         with: |-
           role-to-assume: ${{ vars.role_to_assume }}
           aws-region: us-east-1
-          role-session-name: ${{ vars.role_to_assume }}
+          role-session-name: ${{ vars.role_session_name }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
