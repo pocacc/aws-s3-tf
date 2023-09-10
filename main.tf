@@ -1,13 +1,11 @@
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket
   force_destroy = var.force_destroy
-  default_tags {
-    tags = {
-      Environment     = "Deployment"
-      Project         =  var.bucket
-      E-mail          =  var.email
-      Name            =  var.bucket
-    }
+  tags = {
+    Name        = var.bucket
+    Project     = "Poc_Telefonica_Backstage"
+    Environment = "Development"
+    E-mail      = var.email
   }
 }
 
