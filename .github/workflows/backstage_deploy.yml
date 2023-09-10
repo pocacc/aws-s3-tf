@@ -24,10 +24,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials from AWS account
-        env:
-          aws_region: ${{ values.region }}
-          role_to_assume: ${{ values.role_to_assume }}
-          role_session_name: ${{ values.role_session_name }}
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ values.role_to_assume }}
@@ -49,10 +45,7 @@ jobs:
         env:
           AWS_BUCKET_NAME: ic-telefonica-tf-states
           AWS_BUCKET_KEY_NAME: dev/s3.state
-        run: terraform init \
-              -backend-config="bucket=ic-telefonica-tf-states" \
-              -backend-config="key=dev/s3.state" \
-              -backend-config="region=${{ values.aws_region }}"
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=dev/s3.state" -backend-config="region=${{ values.aws_region }}"
 
       - name: Terraform Validate
         id: validate
