@@ -138,7 +138,7 @@ spec:
         values:
           email: "\"${{ parameters.email }}\""
           bucket: "\"${{  parameters.bucket }}\""
-          force_destroy: "\"${{  parameters.forcedestroy }}\""
+          force_destroy: "\"${{  parameters.force_destroy }}\""
           acl: "\"${{  parameters.acl }}\""
           region: "\"${{  parameters.region }}\""
           role_to_assume : "\"arn:aws:iam::945314604561:role/ic-telefonica-openid-role\""
