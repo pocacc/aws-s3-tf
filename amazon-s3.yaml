@@ -96,7 +96,7 @@ spec:
         type: string
         description: O nome do bucket é único e global
         ui:autofocus: true
-      forcedestroy:
+      force_destroy:
         title: Force destroy
         type: string
         description: O Bucket poderá ser destruído mesmo com arquivos?
