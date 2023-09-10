@@ -134,7 +134,7 @@ spec:
           acl: "\"${{  parameters.acl }}\""
           region: "\"${{  parameters.region }}\""
           role_to_assume : '"arn:aws:iam::945314604561:role/ic-telefonica-openid-role"'
-          role_session_name: ""ic-telefonica-openid-role""
+          role_session_name: '"ic-telefonica-openid-role"'
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
