@@ -7,7 +7,6 @@ module "aws_s3" {
 
   tags = {
     Name        = var.bucket
-    Project     = var.project
     Environment = "Production"
     E-mail      = var.email
   }
