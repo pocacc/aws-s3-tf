@@ -11,6 +11,9 @@ permissions:
 env:
   TF_LOG: INFO
   aws-region: us-east-1
+  role-to-assume: ${{ values.role-to-assume }}
+  role-session-name: ${{ values-session-name }}
+
 jobs:
   backstage_deploy:
     runs-on: ubuntu-latest
@@ -25,9 +28,9 @@ jobs:
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v1
         with: |-
-          role-to-assume: """${{ values.roletoassume }}"""
+          role-to-assume: ${{ vars.role-to-assume }}
           aws-region: us-east-1
-          role-session-name: """${{ valuessessionname }}"""
+          role-session-name: ${{ vars.role-to-assume }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
