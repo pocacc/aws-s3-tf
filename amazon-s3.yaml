@@ -113,11 +113,19 @@ spec:
         description: O bucket terá acesso público ou privado?
         default: "private"
         enum:
-          - "private"
-          - "public"
+          - "private" 
+          - "public-read"
+          - "public-read-write"
+          - "authenticated-read"
+          - "aws-exec-read"
+          - "log-delivery-write"
         enumNames:
           - "privado"
-          - "público"
+          - "público leitura"
+          - "público leitura e escrita"
+          - "autenticação leitura"
+          - "aws execução e leitura"
+          - "entrega e escrita de log"
   steps:
     - id: step2
       name: Log message
