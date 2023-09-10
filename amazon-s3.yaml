@@ -144,6 +144,8 @@ spec:
           acl: '\"${{  parameters.acl}}\"'
           region: '\"${{  parameters.region}}\"'
           email: '\"${{ parameters.email }}\"'
+          role_to_assume: '\"${{values.role_to_assume}}"'
+          role_session_name: '\"${{values_session_name}}"'
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
