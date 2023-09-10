@@ -10,8 +10,6 @@ permissions:
       pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
-  role_to_assume: ${{ values.role_to_assume }}
-  role_session_name: ${{ values.role_session_name }}
 
 
 jobs:
@@ -26,7 +24,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v1
+        env:
+          role_to_assume: ${{ values.role_to_assume }}
+          role_session_name: ${{ values.role_session_name }}
+        uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: ${{ env.role_to_assume }}
           aws-region: ${{ env.aws_region }}
