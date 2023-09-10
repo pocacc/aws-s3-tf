@@ -10,7 +10,6 @@ permissions:
       pull-requests: write # This is required for gh bot to comment PR
 env:
   TF_LOG: INFO
-  aws-region: us-east-1
   role_to_assume: ${{ values.role_to_assume }}
   role_session_name: ${{ values.role_session_name }}
 
@@ -30,7 +29,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ vars.role_to_assume }}
-          aws-region: ${{ vars.region }}
+          aws-region: ${{ values.aws_region }}
           role-session-name: ${{ vars.role_session_name }}
 
       - name: Setup Terraform
@@ -51,7 +50,7 @@ jobs:
         run: terraform init \
               -backend-config="bucket=ic-telefonica-tf-states" \
               -backend-config="key=dev/s3.state" \
-              -backend-config="region=${{ vars.region }}"
+              -backend-config="region=${{ values.aws_region }}"
 
       - name: Terraform Validate
         id: validate
