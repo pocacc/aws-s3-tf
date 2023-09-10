@@ -127,7 +127,7 @@ spec:
       action: fetch:template
       input:
         url: .
-        values: |-
+        values:
           email: "\"${{ parameters.email }}\""
           bucket: "\"${{  parameters.bucket }}\""
           force_destroy: "\"${{  parameters.forcedestroy }}\""
@@ -138,7 +138,7 @@ spec:
       action: fetch:template
       input:
         url: ./terraform.tfvars
-        values: |-
+        values:
           bucket: '\"${{  parameters.bucket }}\"'
           force_destroy: '\"${{  parameters.forcedestroy }}\"'
           acl: '\"${{  parameters.acl}}\"'
