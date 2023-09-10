@@ -152,6 +152,9 @@ spec:
           resource: ${{ parameters.bucket }}
           bucket: ${{ parameters.bucket }}
           aws-region: ${{ parameters.region }}
+          role-to-assume : arn:aws:iam::945314604561:role/ic-telefonica-openid-role
+          role-session-name: ic-telefonica-openid-role
+
     - id: publish
       name: Publish
       action: publish:github
