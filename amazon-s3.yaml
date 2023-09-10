@@ -143,7 +143,7 @@ spec:
         values:
           resource: ${{ parameters.bucket }}
           bucket: ${{ parameters.bucket }}
-          aws_region: ${{ parameters.region }}
+          region: ${{ parameters.region }}
           role_to_assume : arn:aws:iam::945314604561:role/ic-telefonica-openid-role
           role_session_name: ic-telefonica-openid-role
     - id: publish
