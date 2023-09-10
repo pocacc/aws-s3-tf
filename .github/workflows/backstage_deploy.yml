@@ -1,175 +1,105 @@
-apiVersion: scaffolder.backstage.io/v1beta3
-kind: Template
-metadata:
-  namespace: default
-  name: criar-s3-v1
-  title: Criação de Buckets no Amazon S3
-  description: >
-    O Amazon S3, ou Simple Storage Service, é um serviço de armazenamento em nuvem oferecido pela Amazon Web Services (AWS). Ele permite armazenar e recuperar grandes quantidades de dados de forma segura, escalável e altamente disponível. O S3 é frequentemente utilizado para hospedar sites estáticos, armazenar backups, distribuir conteúdo e muito mais. Para criar um novo recurso no Amazon S3, é necessário primeiro acessar o console da AWS e navegar até o serviço S3. Em seguida, clique em "Criar bucket" para iniciar o processo. Um "bucket" é o nome dado ao contêiner de armazenamento principal no S3, que é usado para organizar e gerenciar os arquivos. Durante a criação, você precisará fornecer um nome único para o bucket, escolher a região onde ele será hospedado e configurar as permissões de acesso. Após a criação bem-sucedida, você estará pronto para começar a enviar e gerenciar seus dados no Amazon S3.
-spec:
-  owner: Group:default/telefonica
-  type: resource
+name: "backstage_deploy"
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+permissions:
+      id-token: write # This is required for aws oidc connection
+      contents: read # This is required for actions/checkout
+      pull-requests: write # This is required for gh bot to comment PR
+env:
+  TF_LOG: INFO
+  aws-region: us-east-1
+jobs:
+  backstage_deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: .
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
 
-  parameters:
-  - title: Informacões sobre o solicitante
-    required:
-      - nome
-      - email
-    properties:
-      nome:
-        title: Nome do líder técnico da área*
-        type: string
-        description: Insira o nome do líder técnico.
-        ui:autofocus: true
-      email:
-        title: E-mail do líder técnico*
-        type: string
-        description: Insira o nome do líder técnico.
-        ui:autofocus: true
+      - name: Configure AWS credentials from AWS account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ values.role_to_assume }}
+          aws-region: us-east-1
+          role-session-name: ${{ values.role_session_name }}
 
-  - title: Selecione o ambiente AWS
-    properties:
-      environment:
-        title: Selecione o ambiente
-        type: array
-        items:
-          type: string
-          enum:
-            - production
-            - staging
-            - development
-        uniqueItems: true
-        ui:widget: checkboxes
-      region:
-        title: Escolha a região
-        type: string
-        description: Região na AWS a qual o ambiente será configurado
-        default: us-east-1
-        enum:
-          - af-south-1
-          - ap-east-1
-          - ap-south-1
-          - ap-northeast-3
-          - ap-northeast-2
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-northeast-1
-          - ca-central-1
-          - eu-central-1
-          - eu-west-1
-          - eu-west-2
-          - eu-south-1
-          - eu-west-3
-          - eu-north-1
-          - sa-east-1
-          - us-gov-west-1
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-        enumNames:
-          - África (Cidade do Cabo) - af-south-1
-          - Ásia-Pacífico (Hong Kong) - ap-east-1
-          - Ásia-Pacífico (Mumbai) - ap-south-1
-          - Ásia-Pacífico (Osaka-Local) - ap-northeast-3
-          - Ásia-Pacífico (Seoul) - ap-northeast-2
-          - Ásia-Pacífico (Cingapura) - ap-southeast-1
-          - Ásia-Pacífico (Sydney) - ap-southeast-2
-          - Ásia-Pacífico (Tóquio) - ap-northeast-1
-          - Canadá (Central) - ca-central-1
-          - Europa (Frankfurt) - eu-central-1
-          - Europa (Irlanda) - eu-west-1
-          - Europa (Londres) - eu-west-2
-          - Europa (Milão) - eu-south-1
-          - Europa (Paris) - eu-west-3
-          - Europa (Estocolmo) - eu-north-1
-          - América do Sul (São Paulo) - sa-east-1
-          - AWS GovCloud (EUA) - us-gov-west-1
-          - Leste dos EUA (Norte da Virgínia) - us-east-1
-          - Leste dos EUA (Ohio) - us-east-2
-          - Oeste dos EUA (Norte da Califórnia) - us-west-1
-          - Oeste dos EUA (Oregon) - us-west-2
-  - title: Defina as configurações do ambiente
-    properties:
-      bucket:
-        title: Nome do bucket
-        type: string
-        description: O nome do bucket é único e global
-        ui:autofocus: true
-      forcedestroy:
-        title: Force destroy
-        type: string
-        description: O Bucket poderá ser destruído mesmo com arquivos?
-        default: "false"
-        enum:
-          - "false"
-          - "true"
-        enumNames:
-          - "Não"
-          - "Sim"
-      acl:
-        title: Defina o ACL do bucket
-        type: string
-        description: O bucket terá acesso público ou privado?
-        default: "private"
-        enum:
-          - "private"
-          - "public"
-        enumNames:
-          - "privado"
-          - "público"
-  steps:
-    - id: step2
-      name: Log message
-      action: debug:log
-    - id: fetch
-      name: Template S3 Terraform
-      action: fetch:template
-      input:
-        url: .
-        values:
-          email: "\"${{ parameters.email }}\""
-          bucket: "\"${{  parameters.bucket }}\""
-          force_destroy: "\"${{  parameters.forcedestroy }}\""
-          acl: "\"${{  parameters.acl}}\""
-    - id: catalogTemplate
-      name: Create Terraform TFVARS file
-      action: fetch:template
-      input:
-        url: ./terraform.tfvars
-        values:
-          bucket: "\"${{  parameters.bucket }}\""
-          force_destroy: "\"${{  parameters.forcedestroy }}\""
-          acl: "\"${{  parameters.acl}}\""
-          region: "\"${{  parameters.region}}\""
-          email: "\"${{ parameters.email }}\""
-    - id: GitHubAction
-      name: Insert Variables GitHub Action
-      action: fetch:template
-      input:
-        url: ./.github/workflows/backstage_deploy.yml
-        values:
-          resource: ${{ parameters.bucket }}
-          bucket: ${{ parameters.bucket }}
-          aws-region: ${{ parameters.region }}
-          role_to_assume : "arn:aws:iam::945314604561:role/ic-telefonica-openid-role"
-          role_session_name: "ic-telefonica-openid-role"
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.5
 
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts:
-          - github.com
-        description: This is ${{ parameters.bucket }}
-        repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
-        RepoVisibility: public
-        branchName: main
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
 
-  output:
-    links:
-      - title: Repository
-        url: ${{ steps.publish.output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps.register.output.entityRef }}
+      - name: Terraform Init
+        id: init
+        env:
+          AWS_BUCKET_NAME: ic-telefonica-tf-states
+          AWS_BUCKET_KEY_NAME: dev/s3.state
+        run: terraform init \
+              -backend-config="bucket=ic-telefonica-tf-states" \
+              -backend-config="key=dev/s3.state" \
+              -backend-config="region=us-east-1"
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+            <details><summary>Validation Output</summary>
+
+            \`\`\`\n
+            ${{ steps.validate.outputs.stdout }}
+            \`\`\`
+
+            </details>
+
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=true
