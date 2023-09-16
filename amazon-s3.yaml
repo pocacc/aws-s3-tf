@@ -23,7 +23,7 @@ metadata:
       icon: dashboard
       type: admin-dashboard
 spec:
-  owner: Group:default/telefonica
+  owner: group:infrastructure
   type: resource
 
   parameters:
