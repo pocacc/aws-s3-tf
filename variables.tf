@@ -3,11 +3,11 @@ variable "bucket" {
   default = "ic-s3-deploy"
 }
 
-variable "project" {
+variable "Project" {
   type = string
 }
 
-variable "email" {
+variable "Email" {
   type = string
 }
 
