@@ -27,7 +27,7 @@ jobs:
         with:
           aws-region: ${{ values.bucket }}
           role-to-assume: ${{ secrets.AWS_ROLE }}
-          role-session-name: ic-telefonica-openid-role
+          role-session-name: github-actions-poc-prod-role
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
