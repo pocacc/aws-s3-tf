@@ -1,4 +1,4 @@
-name: "Deploy-S#"
+name: "Deploy-s3"
 on:
   push:
     branches:
@@ -15,7 +15,7 @@ env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
 jobs:
-  build-ssm:
+  deploy s3:
     runs-on: ubuntu-latest
     defaults:
       run:
