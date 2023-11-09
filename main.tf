@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "bucket" {
     Name        = "ic-s3-deploy"
     Project     = "ic-idp"
     Environment = "Development"
-    E-mail      = var.email
+    E-mail      = "test-email"
   }
 }
 
