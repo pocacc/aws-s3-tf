@@ -15,7 +15,7 @@ env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
 jobs:
-  deploy s3:
+  deploy-s3:
     runs-on: ubuntu-latest
     defaults:
       run:
