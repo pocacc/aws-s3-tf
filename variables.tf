@@ -1,6 +1,13 @@
 variable "bucket" {
   type = string
-  default = "ic-s3-deploy"
+}
+
+variable "project" {
+  type = string
+}
+
+variable "email" {
+  type = string
 }
 
 variable "acl" {
