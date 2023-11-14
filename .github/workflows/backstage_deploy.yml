@@ -46,11 +46,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        env:
-          AWS_BUCKET_NAME: ic-telefonica-tf-states
-          AWS_BUCKET_KEY_NAME: dev/s3
-          REPO_NAME: ${{ steps.get_repo_name.outputs.REPO_NAME }}
-        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ env.AWS_BUCKET_KEY_NAME}}/${{ env.REPO_NAME }}.state" -backend-config="region=${{ secrets.AWS_REGION }}"
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ values.environment }}/${{ values.bucket }}.state" -backend-config="region=${{ values.region }}"
 
       - name: Terraform Plan
         id: plan
