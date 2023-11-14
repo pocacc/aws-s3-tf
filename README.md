@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/github/stars/pocacc/aws-s3-tf.svg) ![](https://img.shields.io/github/forks/pocacc/aws-s3-tf.svg)  ![](https://img.shields.io/github/issues/pocacc/aws-s3-tf.svg)
 
-A criação do recurso ${{  values.bucket }} foi autorizada por {{ values.email }}.
+A criação do recurso ${{  values.bucket }} foi autorizada por ${{ values.email }}.
 
 A seguir as configurações selecionadas durante o preenchimento do template no Backstage.
 
@@ -19,3 +19,7 @@ A seguir as configurações selecionadas durante o preenchimento do template no 
 |backend | aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }} |
 
 Para maiores informações, acesse o site **https://backstage.iccloudstudio.com/**
+
+## License
+
+Accenture - IC Cloud Studio
