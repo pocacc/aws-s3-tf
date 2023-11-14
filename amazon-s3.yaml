@@ -160,7 +160,7 @@ spec:
           role_to_assume : "\"arn:aws:iam::859860534726:role/ic-openid-connect-git-role\""
           role_session_name: "\"ic-telefonica-openid-role\""
           environment: "\"${{ parameters.environment }}\""
-          backend: "\"/aws/${{ parameters.region }}/${{ parameters.environment }}/${{ parameters.bucket }}\""
+          backend: "\"aws/${{ parameters.region }}/${{ parameters.environment }}/${{ parameters.bucket }}\""
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
