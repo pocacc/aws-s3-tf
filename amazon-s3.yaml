@@ -146,15 +146,6 @@ spec:
     - id: step2
       name: Log message
       action: debug:log
-    - id: BackendTF
-      name: Terraform backend configuration
-      action: fetch:template
-      input:
-        url: ./backend.tf
-        values:
-          bucket: "\"${{  parameters.bucket }}\""
-          environment: "\"${{ parameters.environment }}\""
-          backend: "\"/aws/\""
     - id: Global Variables
       name: Template S3 Terraform
       action: fetch:template
@@ -169,6 +160,7 @@ spec:
           role_to_assume : "\"arn:aws:iam::859860534726:role/ic-openid-connect-git-role\""
           role_session_name: "\"ic-telefonica-openid-role\""
           environment: "\"${{ parameters.environment }}\""
+          backend: "\"/aws/\""
     - id: GitHubAction
       name: Insert Variables GitHub Action
       action: fetch:template
