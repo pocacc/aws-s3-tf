@@ -8,14 +8,14 @@ A seguir as configurações selecionadas durante o preenchimento do template no 
 
 | Key | Value |
 | ------ | ------ |
-|email | [${{ values.email }}][PlGa] |
-|bucket | [${{  values.bucket }}][PlGa] |
-|force_destroy | [${{  values.force_destroy }}][PlGa] |
-|acl | [${{  values.acl }}][PlGa] |
-|region | [${{  values.region }}][PlGa] |
-|role_to_assume  | [arn:aws:iam::859860534726:role/ic-openid-connect-git-role][PlGa] |
-|role_session_name | [ic-github-openid-role][PlGa] |
-|environment | [${{ values.environment }}][PlGa] |
-|backend | [aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }}][PlGa] |
+|email | ${{ values.email }} |
+|bucket | ${{  values.bucket }} |
+|force_destroy | ${{  values.force_destroy }} |
+|acl | ${{  values.acl }} |
+|region | ${{  values.region }} |
+|role_to_assume  | arn:aws:iam::859860534726:role/ic-openid-connect-git-role |
+|role_session_name | ic-github-openid-role |
+|environment | ${{ values.environment }} |
+|backend | aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }} |
 
 Para maiores informações, acesse o site **https://backstage.iccloudstudio.com/**
