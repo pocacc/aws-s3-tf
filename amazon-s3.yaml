@@ -146,7 +146,15 @@ spec:
     - id: step2
       name: Log message
       action: debug:log
-    - id: fetch
+    - id: BackendTF
+      name: Terraform backend configuration
+      action: fetch:template
+      input:
+        url: ./backend.tf
+        values:
+          bucket: "\"${{  parameters.bucket }}\""
+          environment: "\"${{ parameters.environment }}\""
+    - id: Global Variables
       name: Template S3 Terraform
       action: fetch:template
       input:
