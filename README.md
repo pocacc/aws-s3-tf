@@ -18,7 +18,7 @@ A seguir as configurações selecionadas durante o preenchimento do template no 
 |environment | ${{ values.environment }} |
 |backend | ${{ values.backend }}  |
 
-Para maiores informações, acesse o site **https://backstage.iccloudstudio.com/**
+Para maiores informações acesse o site **https://backstage.iccloudstudio.com/**
 
 ## License
 
