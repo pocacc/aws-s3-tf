@@ -46,15 +46,16 @@ spec:
     properties:
       environment:
         title: Selecione o ambiente
-        type: array
-        items:
-          type: string
-          enum:
-            - production
-            - staging
-            - development
-        uniqueItems: true
-        ui:widget: checkboxes
+        type: string
+        default: development
+        enum:
+          - production
+          - staging
+          - development
+        enumNames:
+          - PRD
+          - STG
+          - DEV
       region:
         title: Escolha a região
         type: string
