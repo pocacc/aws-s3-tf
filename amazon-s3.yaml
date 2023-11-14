@@ -154,6 +154,7 @@ spec:
         values:
           bucket: "\"${{  parameters.bucket }}\""
           environment: "\"${{ parameters.environment }}\""
+          backend: /aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }}
     - id: Global Variables
       name: Template S3 Terraform
       action: fetch:template
