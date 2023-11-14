@@ -23,14 +23,6 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
-      
-      - name: Get Repo Name
-        id: get_repo_name
-        run: echo "::set-output name=REPO_NAME::$(basename $GITHUB_REPOSITORY)"
-  
-      - name: Get Org Name
-        id: get_org_name
-        run: echo "::set-output name=ORG_NAME::$(echo $GITHUB_REPOSITORY | cut -d / -f 1)"
 
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v3
@@ -46,11 +38,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        env:
-          backstage_env: ${{ values.environment }}
-          backstage_resource_name: ${{ values.bucket }}
-          backstage_region: ${{ values.region }}
-        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ values.environment | values.bucket }}" -backend-config="region=${{ values.region }}"
+        run: terraform init
 
 
       - name: Terraform Plan
