@@ -49,13 +49,13 @@ spec:
         type: string
         default: development
         enum:
+          - prd
+          - stg
+          - dev
+        enumNames:
           - production
           - staging
           - development
-        enumNames:
-          - PRD
-          - STG
-          - DEV
       region:
         title: Escolha a região
         type: string
