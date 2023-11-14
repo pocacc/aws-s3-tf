@@ -13,10 +13,10 @@ A seguir as configurações selecionadas durante o preenchimento do template no 
 |force_destroy | ${{  values.force_destroy }} |
 |acl | ${{  values.acl }} |
 |region | ${{  values.region }} |
-|role_to_assume  | arn:aws:iam::859860534726:role/ic-openid-connect-git-role |
-|role_session_name | ic-github-openid-role |
+|role_to_assume  | "arn:aws:iam::859860534726:role/ic-openid-connect-git-role" |
+|role_session_name | "ic-github-openid-role" |
 |environment | ${{ values.environment }} |
-|backend | aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }} |
+|backend | ${{ values.backend }}  |
 
 Para maiores informações, acesse o site **https://backstage.iccloudstudio.com/**
 
