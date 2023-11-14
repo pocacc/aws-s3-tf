@@ -167,11 +167,11 @@ spec:
         url: ./.github/workflows/backstage_deploy.yml
         values:
           resource: ${{ parameters.bucket }}
-          bucket: ${{ parameters.bucket }}
+          bucket: "\"${{  parameters.bucket }}\""
           region: ${{ parameters.region }}
           role_to_assume : arn:aws:iam::859860534726:role/ic-openid-connect-git-role
           role_session_name: ic-telefonica-openid-role
-          environment: ${{ parameters.environment }}
+          environment: "\"${{ parameters.environment }}\""
     - id: publish
       name: Publish
       action: publish:github
