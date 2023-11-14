@@ -46,7 +46,11 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ values.environment }}/${{ values.bucket }}.state" -backend-config="region=${{ values.region }}"
+        env:
+          backstage_env: ${{ values.environment }}
+          backstage_resource_name: ${{ values.bucket }}
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${backstage_env}/${backstage_resourcer_name}.state" -backend-config="region=${{ values.region }}"
+
 
       - name: Terraform Plan
         id: plan
