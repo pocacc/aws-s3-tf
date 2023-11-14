@@ -14,7 +14,7 @@ env:
 
 jobs:
   backstage_deploy:
-    name: 'TF S3 - Backstage'
+    name: 'AWS - S3'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,6 +23,14 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
+      
+      - name: Get Repo Name
+        id: get_repo_name
+        run: echo "::set-output name=REPO_NAME::$(basename $GITHUB_REPOSITORY)"
+  
+      - name: Get Org Name
+        id: get_org_name
+        run: echo "::set-output name=ORG_NAME::$(echo $GITHUB_REPOSITORY | cut -d / -f 1)"
 
       - name: Configure AWS credentials from AWS account
         uses: aws-actions/configure-aws-credentials@v3
@@ -39,11 +47,10 @@ jobs:
       - name: Terraform Init
         id: init
         env:
-          #AWS_BUCKET_NAME: ic-telefonica-tf-states
-          #AWS_BUCKET_KEY_NAME: dev/s3.state
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-          AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+          AWS_BUCKET_NAME: ic-telefonica-tf-states
+          AWS_BUCKET_KEY_NAME: dev/s3
+          REPO_NAME: ${{ steps.get_repo_name.outputs.REPO_NAME }}
+        run: terraform init -backend-config="bucket=ic-telefonica-tf-states" -backend-config="key=${{ env.AWS_BUCKET_KEY_NAME}}/${{ env.REPO_NAME }}.state" -backend-config="region=${{ secrets.AWS_REGION }}"
 
       - name: Terraform Plan
         id: plan
