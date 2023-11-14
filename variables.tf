@@ -10,6 +10,10 @@ variable "email" {
   type = string
 }
 
+variable "environment" {
+  type = string
+}
+
 variable "acl" {
   type = string
   default = "private"
