@@ -1,8 +1,6 @@
 ### Criação de Bucket S3 - ${{  values.bucket }}  ###
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://backstage.iccloudstudio.com)
-
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+![](https://img.shields.io/github/stars/pocacc/aws-s3-tf.svg) ![](https://img.shields.io/github/forks/pocacc/aws-s3-tf.svg)  ![](https://img.shields.io/github/issues/pocacc/aws-s3-tf.svg)
 
 A criação do recurso ${{  values.bucket }} foi autorizada por {{ values.email }}.
 
@@ -19,3 +17,5 @@ A seguir as configurações selecionadas durante o preenchimento do template no 
 |role_session_name | [ic-github-openid-role][PlGa] |
 |environment | [${{ values.environment }}][PlGa] |
 |backend | [aws/${{ values.region }}/${{ values.environment }}/${{ values.bucket }}][PlGa] |
+
+Para maiores informações, acesse o site **https://backstage.iccloudstudio.com/**
