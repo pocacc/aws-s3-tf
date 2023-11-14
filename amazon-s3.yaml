@@ -158,7 +158,7 @@ spec:
           acl: "\"${{  parameters.acl }}\""
           region: "\"${{  parameters.region }}\""
           role_to_assume : "\"arn:aws:iam::859860534726:role/ic-openid-connect-git-role\""
-          role_session_name: "\"ic-telefonica-openid-role\""
+          role_session_name: "\"ic-github-openid-role\""
           environment: "\"${{ parameters.environment }}\""
           backend: "\"aws/${{ parameters.region }}/${{ parameters.environment }}/${{ parameters.bucket }}\""
     - id: GitHubAction
@@ -171,7 +171,7 @@ spec:
           bucket: "\"${{  parameters.bucket }}\""
           region: ${{ parameters.region }}
           role_to_assume : arn:aws:iam::859860534726:role/ic-openid-connect-git-role
-          role_session_name: ic-telefonica-openid-role
+          role_session_name: ic-github-connect-openid-role
           environment: "\"${{ parameters.environment }}\""
     - id: publish
       name: Publish
