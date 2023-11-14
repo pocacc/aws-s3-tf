@@ -2,17 +2,19 @@ name: "destroy_infra"
 on:
   push:
     branches:
-      - destroy
+      - master
   pull_request:
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
       pull-requests: write # This is required for gh bot to comment PR
 env:
-  TF_LOG: INFO
-  AWS_REGION: ${{ secrets.AWS_REGION }}
+  TF_LOG: ERROR
+
+
 jobs:
   destroy_infra:
+    name: 'AWS - S3'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,32 +25,21 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE }}
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-session-name: ic-telefonica-openid-role
+          role-to-assume: ${{ values.role_to_assume }}
+          aws-region: ${{ values.region }}
+          role-session-name: ${{ values.role_session_name }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.2.5
-
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
+          terraform_version: 1.5.7
 
       - name: Terraform Init
         id: init
-        env:
-          AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-          AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
-        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
+        run: terraform init
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
@@ -97,6 +88,6 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform destroy
-        if: github.ref == 'refs/heads/destroy' && github.event_name == 'push'
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform destroy -auto-approve -input=true
