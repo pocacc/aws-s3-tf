@@ -7,3 +7,4 @@ role_to_assume=${{ values.role_to_assume }}
 role_session_name=${{ values.role_session_name }}
 project=${{ values.bucket }}
 environment=${{ values.environment }}
+backend=$${{ values.backend }}
