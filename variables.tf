@@ -14,6 +14,10 @@ variable "environment" {
   type = string
 }
 
+variable "backend" {
+  type = string
+}
+
 variable "acl" {
   type = string
   default = "private"
