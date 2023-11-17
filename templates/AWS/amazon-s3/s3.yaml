@@ -181,7 +181,7 @@ spec:
         values:
           orgName: pocacc
           repoName: ${{ parameters.bucket }}
-          owner: ramon.maia
+          owner: user:ramon.maia
           system: ${{ parameters.bucket }}
           applicationType: api
           description: ${{ parameters.description }}
