@@ -173,6 +173,21 @@ spec:
           role_to_assume : arn:aws:iam::859860534726:role/ic-openid-connect-git-role
           role_session_name: ic-github-connect-openid-role
           environment: "\"${{ parameters.environment }}\""
+    - id: catalogTemplate
+      name: Generating the Catalog Info Component
+      action: fetch:template
+      input:
+        url: ../../../skeletons/catalog-info/
+        values:
+          orgName: pocacc
+          repoName: ${{ parameters.bucket }}
+          owner: ramon.maia
+          system: ${{ parameters.bucket }}
+          applicationType: api
+          description: ${{ parameters.description }}
+          port: 8080
+          sourceControl: github
+
     - id: publish
       name: Publish
       action: publish:github
