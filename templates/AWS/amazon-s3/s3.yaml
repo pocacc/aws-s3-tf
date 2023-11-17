@@ -200,8 +200,7 @@ spec:
         RepoVisibility: public
         branchName: main
 
-
-      - id: register
+    - id: register
       name: Registering the Catalog Info Component
       action: catalog:register
       input:
