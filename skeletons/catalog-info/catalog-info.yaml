@@ -1,6 +1,6 @@
 
 {%- if values.componentName %}
-  {%- set name = values.componentName %}
+  {%- set name = values.componentName %}Stop sharing
 {%- else %}
   {%- set name = values.repoName %}
 {% endif -%}
