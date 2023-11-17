@@ -161,18 +161,6 @@ spec:
           role_session_name: "\"ic-github-openid-role\""
           environment: "\"${{ parameters.environment }}\""
           backend: "\"aws/${{ parameters.region }}/${{ parameters.environment }}/${{ parameters.bucket }}\""
-    - id: GitHubAction
-      name: Insert Variables GitHub Action
-      action: fetch:template
-      input:
-        url: ./.github/workflows/backstage_deploy.yml
-        values:
-          resource: ${{ parameters.bucket }}
-          bucket: "\"${{  parameters.bucket }}\""
-          region: ${{ parameters.region }}
-          role_to_assume : arn:aws:iam::859860534726:role/ic-openid-connect-git-role
-          role_session_name: ic-github-connect-openid-role
-          environment: "\"${{ parameters.environment }}\""
 
     - id: catalogTemplate
       name: Generating the Catalog Info Component
@@ -214,3 +202,6 @@ spec:
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
+
+
+
