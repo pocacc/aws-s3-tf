@@ -189,7 +189,6 @@ spec:
           port: 8080
           sourceControl: github
 
-
     - id: publish
       name: Publish
       action: publish:github
@@ -200,6 +199,14 @@ spec:
         repoUrl: github.com?owner=pocacc&repo=${{ parameters.bucket }}
         RepoVisibility: public
         branchName: main
+
+
+      - id: register
+      name: Registering the Catalog Info Component
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
 
   output:
     links:
