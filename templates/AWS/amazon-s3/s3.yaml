@@ -183,7 +183,7 @@ spec:
           repoName: ${{ parameters.bucket }}
           owner: user:ramon.maia
           system: ${{ parameters.bucket }}
-          applicationType: api
+          applicationType: resource
           description: ${{ parameters.description }}
           port: 8080
           sourceControl: github
