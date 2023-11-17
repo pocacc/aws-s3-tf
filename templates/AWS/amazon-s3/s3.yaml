@@ -34,22 +34,22 @@ spec:
       - repoName
       - owner
       - system
-      repoName:
-        title: Nome do Repositório
-        type: string
-      description:
-        title: Descrição
-        type: string
-        description: Ajude os outros a entenderem mais sobre seu repositório
-      owner:
-        title: Owner
-        type: string
-        ui:field: EntityPicker
-        ui:options:
-          catalogFilter:
-            kind:
-              - Group
-              - User
+    repoName:
+      title: Nome do Repositório
+      type: string
+    description:
+      title: Descrição
+      type: string
+      description: Ajude os outros a entenderem mais sobre seu repositório
+    owner:
+      title: Owner
+      type: string
+      ui:field: EntityPicker
+      ui:options:
+        catalogFilter:
+          kind:
+            - Group
+            - User
       system:
         title: System
         type: string
