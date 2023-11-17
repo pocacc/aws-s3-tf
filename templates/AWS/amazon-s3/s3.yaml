@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   namespace: default
-  name: criar-s3-v2
+  name: criar-s3-v3
   title: Criação de Buckets no Amazon S3
   description: >
     O Amazon S3, ou Simple Storage Service, é um serviço de armazenamento em nuvem oferecido pela Amazon Web Services (AWS). Ele permite armazenar e recuperar grandes quantidades de dados de forma segura, escalável e altamente disponível. O S3 é frequentemente utilizado para hospedar sites estáticos, armazenar backups, distribuir conteúdo e muito mais. Para criar um novo recurso no Amazon S3, é necessário primeiro acessar o console da AWS e navegar até o serviço S3. Em seguida, clique em "Criar bucket" para iniciar o processo. Um "bucket" é o nome dado ao contêiner de armazenamento principal no S3, que é usado para organizar e gerenciar os arquivos. Durante a criação, você precisará fornecer um nome único para o bucket, escolher a região onde ele será hospedado e configurar as permissões de acesso. Após a criação bem-sucedida, você estará pronto para começar a enviar e gerenciar seus dados no Amazon S3.
@@ -24,15 +24,42 @@ metadata:
 spec:
   owner: group:infrastructure
   type: resource
+  system: examples
 
   parameters:
   - title: Informacões sobre o solicitante
     required:
       - nome
       - email
-    properties:
+      - repoName
+      - owner
+      - system
+      repoName:
+        title: Nome do Repositório
+        type: string
+      description:
+        title: Descrição
+        type: string
+        description: Ajude os outros a entenderem mais sobre seu repositório
+      owner:
+        title: Owner
+        type: string
+        ui:field: EntityPicker
+        ui:options:
+          catalogFilter:
+            kind:
+              - Group
+              - User
+      system:
+        title: System
+        type: string
+        ui:field: EntityPicker
+        ui:options:
+          catalogFilter:
+            kind:
+              - System
       nome:
-        title: Nome do líder técnico da área*
+        title: Nome do líder técnico da área que aprovou a criação do recurso*
         type: string
         description: Insira o nome do líder técnico.
         ui:autofocus: true
@@ -213,6 +240,3 @@ spec:
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
-
-
-
